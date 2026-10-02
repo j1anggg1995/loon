@@ -1,0 +1,95 @@
+# 国外 AI 服务分流规则
+# 用法：把下面所有行复制到你 Loon 配置的 [Rule] 段
+# 请先把每行结尾的 PROXY 替换成你实际的策略组名称（例如：节点选择）
+# 注意：不要定义 FINAL，否则会覆盖你原有的兜底规则
+
+# OpenAI / ChatGPT
+DOMAIN-SUFFIX,openai.com,PROXY
+DOMAIN-SUFFIX,chatgpt.com,PROXY
+DOMAIN-SUFFIX,oaistatic.com,PROXY
+DOMAIN-SUFFIX,oaiusercontent.com,PROXY
+DOMAIN-SUFFIX,sora.com,PROXY
+DOMAIN-SUFFIX,openai.org,PROXY
+DOMAIN-SUFFIX,auth0.com,PROXY
+DOMAIN-SUFFIX,openaiapi-site.azureedge.net,PROXY
+DOMAIN-SUFFIX,chatgpt.livekit.cloud,PROXY
+DOMAIN-SUFFIX,openai.azure.com,PROXY
+DOMAIN-SUFFIX,openaicom.imgix.net,PROXY
+# Anthropic / Claude
+DOMAIN-SUFFIX,anthropic.com,PROXY
+DOMAIN-SUFFIX,claude.ai,PROXY
+DOMAIN-SUFFIX,claude.com,PROXY
+DOMAIN-SUFFIX,claudeusercontent.com,PROXY
+DOMAIN-SUFFIX,anthropic-cdn.com,PROXY
+# Google AI / Gemini / DeepMind
+DOMAIN-SUFFIX,gemini.google.com,PROXY
+DOMAIN-SUFFIX,aistudio.google.com,PROXY
+DOMAIN-SUFFIX,makersuite.google.com,PROXY
+DOMAIN-SUFFIX,deepmind.com,PROXY
+DOMAIN-SUFFIX,deepmind.google,PROXY
+DOMAIN,generativelanguage.googleapis.com,PROXY
+DOMAIN-SUFFIX,bard.google.com,PROXY
+DOMAIN-SUFFIX,notebooklm.google.com,PROXY
+DOMAIN-SUFFIX,jules.google,PROXY
+DOMAIN-SUFFIX,labs.google,PROXY
+# xAI / Grok
+DOMAIN-SUFFIX,x.ai,PROXY
+DOMAIN-SUFFIX,grok.com,PROXY
+# Perplexity
+DOMAIN-SUFFIX,perplexity.ai,PROXY
+DOMAIN-SUFFIX,pplx.ai,PROXY
+# Microsoft Copilot
+DOMAIN-SUFFIX,copilot.microsoft.com,PROXY
+DOMAIN-SUFFIX,copilotstudio.microsoft.com,PROXY
+DOMAIN-SUFFIX,githubcopilot.com,PROXY
+DOMAIN-SUFFIX,api.githubcopilot.com,PROXY
+DOMAIN-SUFFIX,copilot-proxy.githubusercontent.com,PROXY
+# Poe / Quora
+DOMAIN-SUFFIX,poe.com,PROXY
+DOMAIN-SUFFIX,quora.com,PROXY
+# 图像 / 音频生成
+DOMAIN-SUFFIX,midjourney.com,PROXY
+DOMAIN-SUFFIX,stability.ai,PROXY
+DOMAIN-SUFFIX,runwayml.com,PROXY
+DOMAIN-SUFFIX,suno.com,PROXY
+DOMAIN-SUFFIX,suno.ai,PROXY
+DOMAIN-SUFFIX,elevenlabs.io,PROXY
+# Hugging Face
+DOMAIN-SUFFIX,huggingface.co,PROXY
+DOMAIN-SUFFIX,hf.co,PROXY
+DOMAIN-SUFFIX,huggingface.com,PROXY
+# AI 聚合与模型服务
+DOMAIN-SUFFIX,openrouter.ai,PROXY
+DOMAIN-SUFFIX,cohere.ai,PROXY
+DOMAIN-SUFFIX,cohere.com,PROXY
+DOMAIN-SUFFIX,mistral.ai,PROXY
+DOMAIN-SUFFIX,together.ai,PROXY
+DOMAIN-SUFFIX,together.xyz,PROXY
+DOMAIN-SUFFIX,fireworks.ai,PROXY
+DOMAIN-SUFFIX,groq.com,PROXY
+DOMAIN-SUFFIX,replicate.com,PROXY
+DOMAIN-SUFFIX,perplexity.com,PROXY
+# 其他常见 AI 工具
+DOMAIN-SUFFIX,cursor.com,PROXY
+DOMAIN-SUFFIX,cursor.sh,PROXY
+DOMAIN-SUFFIX,windsurf.com,PROXY
+DOMAIN-SUFFIX,codeium.com,PROXY
+DOMAIN-SUFFIX,character.ai,PROXY
+DOMAIN-SUFFIX,c.ai,PROXY
+DOMAIN-SUFFIX,pi.ai,PROXY
+DOMAIN-SUFFIX,inflection.ai,PROXY
+DOMAIN-SUFFIX,you.com,PROXY
+# Google 账号与验证（AI 登录常用）
+DOMAIN-SUFFIX,recaptcha.net,PROXY
+DOMAIN-SUFFIX,accounts.google.com,PROXY
+DOMAIN-SUFFIX,accounts.youtube.com,PROXY
+DOMAIN-SUFFIX,gstatic.com,PROXY
+DOMAIN-SUFFIX,googleusercontent.com,PROXY
+# Meta Muse（个人 AI 代理）
+DOMAIN-SUFFIX,muse.ai,PROXY
+DOMAIN-SUFFIX,meta.ai,PROXY
+DOMAIN-SUFFIX,ai.meta.com,PROXY
+DOMAIN-SUFFIX,meta.com,PROXY
+DOMAIN-SUFFIX,fb.com,PROXY
+DOMAIN-SUFFIX,facebook.com,PROXY
+DOMAIN-SUFFIX,fbcdn.net,PROXY
