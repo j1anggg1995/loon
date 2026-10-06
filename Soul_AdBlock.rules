@@ -1,0 +1,54 @@
+# Soul 去广告规则（Loon 用）— 合并版
+# 用法：把下面所有行复制到你 Loon 配置的 [Rule] 段，
+#       或在 [Remote Rule] 里用远程订阅加载
+# Soul 主域名用 DIRECT 直连（国内 App，直连更快）；广告/统计域名 REJECT 拦截
+# Loon 规则从上往下匹配：精确的 REJECT 写在前面，兜底的 DIRECT 写在最后
+# REJECT / DIRECT 都是 Loon 内建动作，不用替换
+# 注意：不要定义 FINAL，否则会覆盖你原有的兜底规则
+#
+# 说明：
+# - ad.soulapp.cn 等 6 条是 Soul 疑似自有广告/统计子域名（Soul 未公开，是推测）：
+#   拦掉后开屏和自有推广大概率直接消失；统计上报失败不影响聊天、匹配等主功能。
+#   万一发现 Soul 有功能异常（比如动态发不出、匹配一直转圈），先把这 6 条注释掉再试。
+# - 第三方广告 SDK（穿山甲、广点通、快手、百度）全部拦截，开屏广告基本绝迹
+# - 友盟/TalkingData/秒针是统计和广告监测，拦掉只减少追踪，不影响使用
+# - 局限：走 soulapp.cn 主接口下发的原生信息流广告，域名规则去不掉，
+#   要彻底去需要 MITM + 重写脚本（Loon 插件形式）
+
+# ============ Soul 自有广告/统计子域名（精确拦截） ============
+DOMAIN,ad.soulapp.cn,REJECT
+DOMAIN,sensor.soulapp.cn,REJECT
+DOMAIN,track.soulapp.cn,REJECT
+DOMAIN,log.soulapp.cn,REJECT
+DOMAIN,stat.soulapp.cn,REJECT
+DOMAIN,report.soulapp.cn,REJECT
+
+# ============ 字节跳动 穿山甲 / Pangle ============
+DOMAIN-SUFFIX,pangolin-sdk-toutiao.com,REJECT
+DOMAIN-SUFFIX,pangolin.snssdk.com,REJECT
+DOMAIN-SUFFIX,pangle.io,REJECT
+
+# ============ 腾讯 广点通 ============
+DOMAIN-SUFFIX,gdt.qq.com,REJECT
+DOMAIN-SUFFIX,e.qq.com,REJECT
+
+# ============ 快手广告 ============
+DOMAIN-SUFFIX,adkwai.com,REJECT
+DOMAIN-SUFFIX,open.e.kuaishou.com,REJECT
+DOMAIN-SUFFIX,e.kuaishou.com,REJECT
+
+# ============ 百度广告 ============
+DOMAIN,mobads.baidu.com,REJECT
+DOMAIN,mobads-logs.baidu.com,REJECT
+
+# ============ 数据统计/广告监测（拦掉只减少追踪，不影响使用） ============
+DOMAIN-SUFFIX,umeng.com,REJECT
+DOMAIN-SUFFIX,umengcloud.com,REJECT
+DOMAIN-SUFFIX,talkingdata.com,REJECT
+DOMAIN-SUFFIX,miaozhen.com,REJECT
+DOMAIN-SUFFIX,irs01.com,REJECT
+
+# ============ Soul 主域名直连（保证 App 正常运行，兜底放最后） ============
+DOMAIN-SUFFIX,soulapp.cn,DIRECT
+DOMAIN-SUFFIX,soulapp.net,DIRECT
+DOMAIN-SUFFIX,soulapp.com,DIRECT
