@@ -1,0 +1,58 @@
+#!name=Soul去广告
+#!desc=拦截 Soul 开屏/信息流广告，移除星球聊天送礼面板。需开启 Loon 的复写、脚本、MitM 并信任证书。
+#!author=nomi
+
+[Rule]
+# Soul 主域名直连，保证 App 正常运行
+DOMAIN-SUFFIX,soulapp.cn,DIRECT
+DOMAIN-SUFFIX,soulapp.net,DIRECT
+DOMAIN-SUFFIX,soulapp.com,DIRECT
+# Soul 自家广告子域名（ssp 走复写返回空，这里不直接 REJECT）
+DOMAIN,ad-h5-cdn.soulapp.cn,REJECT
+DOMAIN,ad-h5-station-cdn.soulapp.cn,REJECT
+DOMAIN,ad-r.soulapp.cn,REJECT
+DOMAIN,soul-ad.soulapp.cn,REJECT
+# 疑似统计/上报子域名（若 Soul 功能异常，优先注释这几条）
+DOMAIN,sensor.soulapp.cn,REJECT
+DOMAIN,track.soulapp.cn,REJECT
+DOMAIN,log.soulapp.cn,REJECT
+DOMAIN,stat.soulapp.cn,REJECT
+DOMAIN,report.soulapp.cn,REJECT
+# 第三方广告 SDK
+DOMAIN-SUFFIX,pangolin-sdk-toutiao.com,REJECT
+DOMAIN-SUFFIX,pangolin.snssdk.com,REJECT
+DOMAIN-SUFFIX,pangle.io,REJECT
+DOMAIN-SUFFIX,gdt.qq.com,REJECT
+DOMAIN-SUFFIX,e.qq.com,REJECT
+DOMAIN-SUFFIX,adkwai.com,REJECT
+DOMAIN-SUFFIX,open.e.kuaishou.com,REJECT
+DOMAIN-SUFFIX,e.kuaishou.com,REJECT
+DOMAIN,mobads.baidu.com,REJECT
+DOMAIN,mobads-logs.baidu.com,REJECT
+# 统计/广告监测（拦掉只减少追踪，不影响使用）
+DOMAIN-SUFFIX,umeng.com,REJECT
+DOMAIN-SUFFIX,umengcloud.com,REJECT
+DOMAIN-SUFFIX,talkingdata.com,REJECT
+DOMAIN-SUFFIX,miaozhen.com,REJECT
+DOMAIN-SUFFIX,irs01.com,REJECT
+# 广告服务器 IP（可能变动，失效可删）
+IP-CIDR,47.56.131.76/32,REJECT
+IP-CIDR,47.97.215.55/32,REJECT
+IP-CIDR,47.99.42.29/32,REJECT
+IP-CIDR,47.110.187.87/32,REJECT
+IP-CIDR,47.243.147.125/32,REJECT
+IP-CIDR,120.27.235.201/32,REJECT
+IP-CIDR,121.196.197.147/32,REJECT
+
+[Rewrite]
+# Soul 自家广告投放平台：请求直接返回空对象（注意 ssp 不要在上面写 REJECT，否则这条不生效）
+^https:\/\/ssp\.soulapp\.cn\/ - reject-dict
+# 移除聊天送礼：星球礼物推荐列表返回空，送礼面板无内容（精确匹配单个接口，不影响聊天本身）
+^https:\/\/chat-live\.soulapp\.cn\/live\/planet\/recListV2 - reject-200
+
+[Script]
+# 响应清洗：删除接口返回中明确的广告字段，解析失败则原样返回
+Soul去广告 = type=http-response,pattern=^https:\/\/(?:api-\w+|gateway-mobile-gray|post)\.soulapp\.cn,requires-body=true,script-path=https://raw.githubusercontent.com/j1anggg1995/loon/main/Soul_remove_ads.js,timeout=10,script-update-interval=86400
+
+[Mitm]
+hostname = api*.soulapp.cn, gateway-mobile-gray.soulapp.cn, post.soulapp.cn, ssp.soulapp.cn
